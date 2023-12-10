@@ -12,7 +12,7 @@ namespace BookShop.Models
         [Required]
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
         public int OrderStatusId { get; set; }
-        public int OrderStatusId { get; set; }
+        public bool IsDeleted { get; set; } = false;
         public OrderStatus OrderStatus { get; set; }
 
     }
