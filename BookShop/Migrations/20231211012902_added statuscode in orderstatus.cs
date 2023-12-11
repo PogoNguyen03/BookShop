@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BookShop.Data.Migrations
+namespace BookShop.Migrations
 {
     /// <inheritdoc />
     public partial class addedstatuscodeinorderstatus : Migration
