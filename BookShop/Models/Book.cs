@@ -22,7 +22,7 @@ namespace BookShop.Models
         public List<OrderDetail> OrderDetails { get; set; }
         public List<CartDetail> CartDetail { get; set; }
 
-        [NotMapped] 
-        public string GenreName { get; set;}
+        [NotMapped]
+        public string? GenreName { get; set; }
     }
 }
