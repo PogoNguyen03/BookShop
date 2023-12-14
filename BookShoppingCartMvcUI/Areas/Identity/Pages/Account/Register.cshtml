@@ -1,0 +1,72 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<link href="/css/login_register.css" rel="stylesheet" />
+
+
+<!-- Pills navs -->
+<ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" aria-controls="pills-login"asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
+    </li>
+</ul>
+
+<div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="text-center mb-3">
+            <p>Đăng ký bằng:</p>
+            <button type="button" class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-facebook-f"></i>
+            </button>
+
+            <button type="button" class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-google"></i>
+            </button>
+
+            <button type="button" class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-twitter"></i>
+            </button>
+
+            <button type="button" class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-github"></i>
+            </button>
+        </div>
+
+        <p class="text-center">Hoặc:</p>
+
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@gmail.com" />
+            <label asp-for="Input.Email">Email</label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+            <label asp-for="Input.Password">Mật khẩu</label>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <!-- Repeat Password input -->
+        <div class="form-outline mb-4">
+            <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+            <label asp-for="Input.ConfirmPassword">Nhập lại mật khẩu</label>
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <!-- Submit button -->
+        <div class="w-auto d-flex justify-content-center">
+            <button id="registerSubmit" type="submit" class="btn btn-primary btn-block mb-3 w-100">Đăng ký</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

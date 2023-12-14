@@ -1,0 +1,7 @@
+﻿.max-height-200 {
+    max-height: 300px; /* Thay đổi giá trị theo nhu cầu của bạn */
+}
+.custom-image {
+    max-width: 100%;
+    height: auto;
+}
