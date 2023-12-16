@@ -16,4 +16,10 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\QuangCao\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Books\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

@@ -18,6 +18,8 @@ builder.Services
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IHomeRepository,HomeRepository>();
 builder.Services.AddTransient<ICartRepository,CartRepository>();
+builder.Services.AddTransient<IBookReponsitory, BookReponsitory>();
+
 builder.Services.AddTransient<IUserOrderRepository,UserOrderRepository>();
 var app = builder.Build();
 //using (var scope = app.Services.CreateScope())

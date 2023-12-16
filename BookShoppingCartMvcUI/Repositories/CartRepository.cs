@@ -176,6 +176,7 @@ namespace BookShoppingCartMvcUI.Repositories
             {
                 return false;
             }
+
         }
 
         private string GetUserId()

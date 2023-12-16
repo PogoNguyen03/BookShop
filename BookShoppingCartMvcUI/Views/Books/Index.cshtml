@@ -1,0 +1,86 @@
+﻿@model BookDisplayModel
+
+@{
+    ViewData["Title"] = "Index";
+
+    string HasImage(Book book)
+    {
+        if (book.Image != "" && book.Image != null)
+        {
+            return "fa-solid fa-check";
+        }
+        else
+        {
+            return "fa-solid fa-x";
+        }
+    }
+
+    @functions {
+        string GetGenreName(int genreId)
+        {
+            var genre = Model.Genres.FirstOrDefault(g => g.Id == genreId);
+            return genre != null ? genre.GenreName : "Không có thể loại";
+        }
+    }
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa-solid fa-book"></i> Add Book</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Truyện
+            </th>
+            <th>
+                Tác giả
+            </th>
+            <th>
+                Đơn giá
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Thể loại
+            </th>
+            <th>
+                Hình ảnh tồn tại
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Books)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    @GetGenreName(item.GenreId)
+                </td>
+                <td>
+                    <i class="@HasImage(item)"></i>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success"><i class="fa-solid fa-circle-info"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

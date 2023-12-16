@@ -1,0 +1,84 @@
+﻿@model BookShoppingCartMvcUI.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="row mt-5">
+    <div class="col-2">
+        <img src="/images/AnhTruyen/@Model.Image" class="w-100 h-100" />
+    </div>
+    <div class="col-5">
+
+        <div>
+            <h4>@Model.BookName</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Tác giả: 
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.AuthorName)
+                </dd>
+                <dt class="col-sm-2">
+                    Giá:
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                
+                <dt class="col-sm-2">
+                    Thể loại: 
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.GenreName)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Index" class="btn btn-warning"><i class="bi bi-arrow-return-left"></i> Quay lại</a>
+            <button type="button" onclick="add(@Model.Id)" class="btn btn-primary rounded-2">Thêm vào giỏ hàng <i class="bi bi-cart"></i></button>
+        </div>
+    </div>
+    
+</div>
+
+<p class="d-inline-flex gap-1 mt-4">
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <i class="bi bi-book-half"></i>  Nội dung
+    </a>
+</p>
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        @Html.DisplayFor(model => model.Summary)
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        async function add(bookId) {
+            var usernameEl = document.getElementById("username");
+            if (usernameEl == null) {
+                window.location.href = "/Identity/Account/Login";
+                //var username=usernameEl.innerText;
+                //  if(username.length<1){
+                //      window.location.href="/Identity/Account/Login";
+                //  }
+            }
+            try {
+                var response = await fetch(`/Cart/AddItem?bookId=${bookId}`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result;
+                    window.location.href = "#cartCount";
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    </script>
+
+}

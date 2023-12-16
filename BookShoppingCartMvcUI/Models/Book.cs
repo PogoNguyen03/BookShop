@@ -18,6 +18,8 @@ namespace BookShoppingCartMvcUI.Models
         [Required]
         public double Price { get; set; }
         public string? Image { get; set; }
+        [MaxLength(1000)]
+        public string? Summary { get; set; }
         [Required]
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
