@@ -88,8 +88,17 @@
                             <b>Tác giả: </b>@book.AuthorName<br>
                             <b>Giá: </b>@book.Price <br>
                         </p>
-                    </a>
-                <button type="button" onclick="add(@book.Id)" class="btn btn-primary rounded-2 mt-2">Thêm vào giỏ hàng <i class="bi bi-cart"></i></button>
+                </a>
+                @if (book.IsInOrder)
+                {
+                    <div class="d-flex justify-content-center">
+                        <button type="button" onclick="readBook(@book.Id)" class="btn btn-primary rounded-2 mt-2">Đọc truyện tranh &nbsp<i class="fa-solid fa-book"></i></button>
+                    </div>
+                }
+                else
+                {
+                    <button type="button" onclick="add(@book.Id)" class="btn btn-primary rounded-2 mt-2">Thêm vào giỏ hàng  <i class="bi bi-cart"></i></button>
+                }
                 </div>
             </div>
     }

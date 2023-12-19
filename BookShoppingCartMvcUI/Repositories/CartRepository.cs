@@ -108,6 +108,19 @@ namespace BookShoppingCartMvcUI.Repositories
             return shoppingCart;
 
         }
+        public async Task<ShoppingCart> GetPayment()
+        {
+            var userId = GetUserId();
+            if (userId == null)
+                throw new Exception("Invalid userid");
+            var shoppingCart = await _db.ShoppingCarts
+                                  .Include(a => a.CartDetails)
+                                  .ThenInclude(a => a.Book)
+                                  .ThenInclude(a => a.Genre)
+                                  .Where(a => a.UserId == userId).FirstOrDefaultAsync();
+            return shoppingCart;
+
+        }
         public async Task<ShoppingCart> GetCart(string userId)
         {
             var cart = await _db.ShoppingCarts.FirstOrDefaultAsync(x => x.UserId == userId);
@@ -149,11 +162,11 @@ namespace BookShoppingCartMvcUI.Repositories
                 {
                     UserId = userId,
                     CreateDate = DateTime.UtcNow,
-                    OrderStatusId = 1//pending
+                    OrderStatusId = 3//pending
                 };
                 _db.Orders.Add(order);
                 _db.SaveChanges();
-                foreach(var item in cartDetail)
+                foreach (var item in cartDetail)
                 {
                     var orderDetail = new OrderDetail
                     {
@@ -174,9 +187,9 @@ namespace BookShoppingCartMvcUI.Repositories
             }
             catch (Exception)
             {
+
                 return false;
             }
-
         }
 
         private string GetUserId()

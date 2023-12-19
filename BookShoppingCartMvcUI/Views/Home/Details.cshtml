@@ -38,8 +38,21 @@
         </div>
         <div>
             <a asp-action="Index" class="btn btn-warning"><i class="bi bi-arrow-return-left"></i> Quay lại</a>
-            <button type="button" onclick="add(@Model.Id)" class="btn btn-primary rounded-2">Thêm vào giỏ hàng <i class="bi bi-cart"></i></button>
+            @if (Model.IsInOrder)
+            {
+                <button type="button" onclick="readBook(@Model.Id)" class="btn btn-primary rounded-2">Đọc truyện tranh &nbsp<i class="fa-solid fa-book"></i></button>
+            }
+            else
+            {
+                <button type="button" onclick="add(@Model.Id)" class="btn btn-primary rounded-2">Thêm vào giỏ hàng <i class="bi bi-cart"></i></button>
+            }
+            <form asp-action="AddChapter" asp-controller="Home" asp-route-id="@Model.Id" method="post">
+                <!-- Các trường nhập thông tin cho chap -->
+                <button type="submit" class="btn btn-primary rounded-2">Thêm Chap</button>
+            </form>
+
         </div>
+        
     </div>
     
 </div>

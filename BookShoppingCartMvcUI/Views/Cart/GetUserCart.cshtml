@@ -33,7 +33,7 @@
                     </td>
                     <td>@item.Book.Genre.GenreName</td>
                     <td>@item.Book.Price x @item.Quantity</td>
-                    <td>@(item.Book.Price * item.Quantity)</td>
+                    <td>@(item.Book.Price * item.Quantity)đ</td>
                     <td>
                         <a class="btn btn-info" href="/Cart/AddItem?bookId=@item.BookId&&redirect=1">+</a>
                         <a class="btn btn-info" href="/cart/removeitem?bookid=@item.BookId">-</a>
@@ -44,17 +44,12 @@
 
         <div class="my-2">
             <h5>Tổng hóa đơn: </h5>
-            @(Model.CartDetails.Select(item => item.Book.Price * item.Quantity).Sum())
+            @(Model.CartDetails.Select(item => item.Book.Price * item.Quantity).Sum())đ
         </div>
 
         <div class="my-2">
-            <a class="btn btn-primary" href="/Cart/Checkout">Checkout</a>
+            <a class="btn btn-primary" href="/Cart/Payment">Thanh toán</a>
         </div>
-        <div class="my-2">
-            <!-- Thêm nút "Xác Nhận Đơn Hàng" -->
-            <a href="/Cart/Confirmation" class="btn btn-primary">Confirm Order</a>
-        </div>
-
     }
     else
     {

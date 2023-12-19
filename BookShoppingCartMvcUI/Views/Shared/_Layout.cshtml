@@ -10,6 +10,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
+            <img style="width:3%; height:3%" src="/images/Logo/logo.png" class="card-img-top" alt="...">
             <a class="navbar-brand" href="/Home/Index">Kho truyện tranh</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,9 +26,12 @@
                     @* <li class="nav-item">
                         <a class="nav-link" href="/Home/Privacy">Bảo mật</a>
                     </li> *@
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Books" asp-action="Index">Danh sách truyện</a>
-                    </li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Books" asp-action="Index">Danh sách truyện</a>
+                        </li>
+                    }
                     @*<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                         <div class="dropdown-menu">

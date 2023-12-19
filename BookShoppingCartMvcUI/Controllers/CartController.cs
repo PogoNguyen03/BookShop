@@ -37,6 +37,12 @@ namespace BookShoppingCartMvcUI.Controllers
             return Ok(cartItem);
         }
 
+        public async Task<IActionResult> Payment()
+        {
+            var cart = await _cartRepo.GetPayment();
+            return View(cart);
+        }
+
         public async Task<IActionResult> Checkout()
         {
             bool isCheckedOut = await _cartRepo.DoCheckout();

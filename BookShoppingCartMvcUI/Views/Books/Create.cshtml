@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BookName" class="control-label"></label>
@@ -19,8 +19,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="AuthorName" class="control-label"></label>
-                <textarea asp-for="AuthorName" class="form-control" cols=40 rows=5></textarea>
+                <input asp-for="AuthorName" class="form-control" />
                 <span asp-validation-for="AuthorName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Summary" class="control-label"></label>
+                <textarea asp-for="Summary" class="form-control" cols=40 rows=5></textarea>
+                <span asp-validation-for="Summary" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -34,8 +39,13 @@
             </div> *@
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" type="file" id="formFileMultiple" multiple>
+                <input asp-for="Image" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenreId" class="control-label"></label>
+                <input asp-for="GenreId" class="form-control" />
+                <span asp-validation-for="GenreId" class="text-danger"></span>
             </div>
            @*  <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
@@ -55,6 +65,7 @@
             </div> *@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                @* <button type="button" onclick="add(bookId)" class="btn btn-primary rounded-2 mt-2">Thêm truyện</button> *@
             </div>
         </form>
     </div>
@@ -62,8 +73,12 @@
 
 <div>
     <a asp-action="Index" class="btn btn-warning"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    
 }
+

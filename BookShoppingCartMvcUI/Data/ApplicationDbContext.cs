@@ -13,6 +13,7 @@ namespace BookShoppingCartMvcUI.Data
 
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<Chapter> Chapters { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<CartDetail> CartDetails { get; set; }
         public DbSet<Order> Orders { get; set; }

@@ -12,6 +12,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
+    <PackageReference Include="PayPal" Version="1.9.1" />
+    <PackageReference Include="Sek.Module.Payment.VnPay.AspNetCore" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\images\QuangCao\" />

@@ -1,0 +1,97 @@
+﻿@model ShoppingCart
+@{
+}
+
+<section style="">
+    <div class="container py-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center pb-5">
+                    <div class="col-md-7 col-xl-5 mb-4 mb-md-0">
+                        <div class="py-4 d-flex flex-row">
+                            <h5><span class="far fa-check-square pe-2"></span><b>Kho truyện tranh</b> |</h5>
+                            <span class="ps-2">Thanh toán</span>
+                        </div>
+                        <h4 class="text-success"> @(Model.CartDetails.Select(item => item.Book.Price * item.Quantity).Sum())đ</h4>
+                        <h4>Phương thức thanh toán</h4>
+                        <div class="d-flex pt-2">
+                            
+                        </div>
+                        
+                        <hr />
+                        <div class="pt-2">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-10">
+                                    <form>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <label class="form-label" for="typeText">Mã thẻ</label>
+                                            <div class="form-outline">
+                                                <input type="text" id="typeText" class="form-control"
+                                                       placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <label class="form-label" for="typeName">Tên chủ thẻ</label>
+                                            <div class="form-outline">
+                                                <input type="text" id="typeName" class="form-control" siez="17"
+                                                       placeholder="Nguyễn Văn A" />
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center pb-2">
+                                             <label class="form-label" for="typeExp">Ngày hết hạn</label>
+                                            <div class="form-outline">
+                                                <input type="text" id="typeExp" class="form-control" placeholder="MM/YYYY"
+                                                       size="7" id="exp" minlength="7" maxlength="7" />
+                                            </div>
+
+                                            <label class="form-label" for="typeText2">Cvv</label>
+                                            <div class="form-outline">
+                                                <input type="password" id="typeText2" class="form-control"
+                                                       placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="py-4 d-flex justify-content-start">
+                                <a asp-action="Index" class="btn btn-warning"><i class="fa-solid fa-arrow-left"></i> Quay về</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-xl-4 offset-xl-1">
+                        
+                        <div class="rounded d-flex flex-column p-2" style="background-color: ;">
+                            <div class="p-2 me-3 pt-4 mt-5">
+                                <h4>Thông tin thanh toán</h4>
+                            </div>
+                            @foreach (var item in Model.CartDetails)
+                            {
+                                <div class="p-2 d-flex">
+                                    <div class="col-8 w-75 text-truncate ">@item.Book.BookName</div>
+                                    <div class="ms-auto">@(item.Book.Price * item.Quantity)đ</div>
+                                </div>
+                            }
+                            
+                            <div class="border-top px-2 mx-2"></div>
+                            <div class="p-2 d-flex pt-3">
+                                <div class="col-8"><b>Tổng giá tiền</b></div>
+                                <div class="ms-auto"><b class="text-success"> @(Model.CartDetails.Select(item => item.Book.Price * item.Quantity).Sum())đ</div>
+                            </div>
+                        </div>
+                        <div class="py-4 d-flex justify-content-end">
+                            @* <a class="btn btn-primary" href="/Cart/Checkout">Checkout</a> *@
+                            <a class="btn btn-primary btn-block btn-lg" href="/Cart/Checkout">Thanh toán</a>
+                            @* <input type="button" href="/Cart/Checkout" value="Thanh toán" class="btn btn-primary btn-block btn-lg" /> *@
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

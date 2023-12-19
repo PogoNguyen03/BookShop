@@ -18,6 +18,10 @@ namespace BookShoppingCartMvcUI.Models
         [Required]
         public double Price { get; set; }
         public string? Image { get; set; }
+        [Required,
+        DataType(DataType.Date),
+        Display(Name = "Date Published")]
+        public DateTime DatePublished { get; set; }
         [MaxLength(1000)]
         public string? Summary { get; set; }
         [Required]
@@ -28,6 +32,8 @@ namespace BookShoppingCartMvcUI.Models
 
         [NotMapped]
         public string GenreName { get; set; }
+        [NotMapped]
+        public bool IsInOrder { get; set; }
 
     }
 }

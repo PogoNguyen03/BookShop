@@ -3,6 +3,7 @@ using BookShoppingCartMvcUI.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookShoppingCartMvcUI.Controllers
 {
@@ -24,6 +25,11 @@ namespace BookShoppingCartMvcUI.Controllers
         {
             IEnumerable<Book> books = await _homeRepository.GetBooks(sterm, genreId);
             IEnumerable<Genre> genres = await _homeRepository.Genres();
+            // Kiểm tra từng sách để xác định liệu nó có trong Order hay không
+            foreach (var book in books)
+            {
+                book.IsInOrder = await _homeRepository.CheckIfBookExistsInOrder(book.Id);
+            }
             BookDisplayModel bookModel = new BookDisplayModel
             {
               Books=books,
@@ -57,6 +63,7 @@ namespace BookShoppingCartMvcUI.Controllers
             {
                 book.GenreName = book.Genre?.GenreName ?? "Không có thể loại";
             }
+            book.IsInOrder = await _homeRepository.CheckIfBookExistsInOrder(book.Id);
             return View(book);
         }
 
@@ -64,6 +71,22 @@ namespace BookShoppingCartMvcUI.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddChapter(int bookId, Chapter chapter)
+        {
+            if (ModelState.IsValid)
+            {
+                // Lưu chap vào cơ sở dữ liệu
+                chapter.BookId = bookId;
+                _db.Chapters.Add(chapter);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Details", new { id = bookId });
+            }
+
+            // Nếu có lỗi, trả về view hoặc thông báo lỗi
+            return View("Error");
         }
     }
 }

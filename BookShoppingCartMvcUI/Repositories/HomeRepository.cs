@@ -43,5 +43,10 @@ namespace BookShoppingCartMvcUI.Repositories
             return books;
 
         }
+        public async Task<bool> CheckIfBookExistsInOrder(int bookId)
+        {
+            // Kiểm tra xem có bản ghi nào trong OrderDetail có bookId tương ứng không
+            return await _db.OrderDetails.AnyAsync(od => od.BookId == bookId);
+        }
     }
 }
